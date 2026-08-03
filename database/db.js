@@ -1,5 +1,5 @@
-const sqlite3 = require('better-sqlite3');
-const path = require('path');
+const sqlite3 = require('better-sqlite3');  //sqlite used
+const path = require('path'); 
 
 const db = new sqlite3(path.join(process.cwd(), 'tasks.db'));  // current working directory, 
 
@@ -11,8 +11,8 @@ title - text
 description - text
 due date - text (sqlite has no date)
 topic - text
-is_archived - 0 or 1 boolean
-status - text but add check so that only todo, in-progress and complete are allowed
+is_archived - 0 or 1 boolean (0 is false, 1 is true)
+status - text but add check so that only todo, in-progress and complete are allowed (todo is defualt)
 
 
 */ 
