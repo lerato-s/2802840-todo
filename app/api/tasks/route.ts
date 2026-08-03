@@ -1,7 +1,6 @@
 import db from '../../../database/db'; // database
 
-// get tasks 
-// insert task
+// fetch tasks and new create tasks using GET and POST api routes :)
 
 export async function GET() {
     const tasks = db.prepare('SELECT * FROM tasks').all();
@@ -16,6 +15,6 @@ export async function POST(request: Request) {
         INSERT INTO tasks (title, description, topic, due_date)
         VALUES (?, ?, ?, ?)`).run(title, description, topic, due_date);
 
-    const newTask = db.prepare('SELECT * FROM tasks').get(result.lastInsertRowid);
+    const newTask = db.prepare('SELECT * FROM tasks').get(result.lastInsertRowid); 
     return Response.json(newTask);
 }
