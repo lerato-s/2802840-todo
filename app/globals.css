@@ -1,26 +1,98 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  body {
+    font-family: var(--font-poppins), system-ui, -apple-system, sans-serif;
+    background: linear-gradient(135deg, #FFF8E7 0%, #FFEFD5 50%, #FFE4E1 100%);
+    min-height: 100vh;
+    color: #4A3728;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  html {
+    min-height: 100vh;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  /* Custom component styles */
+  .bg-pastel-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 248, 231, 0.95));
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+  }
+
+  .bg-pastel-card-overdue {
+    background: linear-gradient(135deg, rgba(255, 240, 240, 0.95), rgba(255, 228, 225, 0.95));
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+  }
+
+  .bg-pastel-form {
+    background: rgba(255, 248, 231, 0.9);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+  }
+
+  .text-gradient-title {
+    background: linear-gradient(135deg, #FFB7C5 0%, #FFD4A8 50%, #FFEAA7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+@layer utilities {
+  /* Animation utilities */
+  @keyframes pulse-soft {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.8;
+      transform: scale(1.05);
+    }
+  }
+
+  .animate-pulse-soft {
+    animation: pulse-soft 2s ease-in-out infinite;
+  }
+
+  @keyframes slide-in {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-slide-in {
+    animation: slide-in 0.3s ease-out;
+  }
+
+  /* Scrollbar styles */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #FFF8E7;
+    border-radius: 10px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #FFB7C5;
+    border-radius: 10px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #FF8FA3;
+  }
 }

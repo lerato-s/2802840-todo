@@ -27,35 +27,35 @@ export default function TaskForm({ onCreate }: TaskFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-2 mb-6 p-4 border rounded-xl">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-3">
       <input
         value={title}
         onChange={e => setTitle(e.target.value)}
-        placeholder="Title"
+        placeholder="Task title..."
         required
-        className="border p-2 rounded"
+        className="form-input"
       />
       <textarea
         value={description}
         onChange={e => setDescription(e.target.value)}
-        placeholder="Description"
-        className="border p-2 rounded"
+        placeholder="Description (optional)"
+        className="form-textarea"
       />
       <input
         type="date"
         value={due_date}
         onChange={e => setDueDate(e.target.value)}
         required
-        className="border p-2 rounded"
+        className="form-input"
       />
       <input
         value={topic}
         onChange={e => setTopic(e.target.value)}
-        placeholder="Topic"
+        placeholder="Topic (e.g., Work, Personal)"
         required
-        className="border p-2 rounded"
+        className="form-input"
       />
-      <button type="submit" className="px-3 py-1 border rounded bg-black text-white">
+      <button type="submit" className="btn-primary">
         Create Task
       </button>
     </form>

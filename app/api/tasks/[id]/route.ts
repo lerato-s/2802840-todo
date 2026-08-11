@@ -2,9 +2,9 @@ import db from '../../../../database/db';
 
 export async function PATCH(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  const id = params.id;
+  const {id} = await params;
   const body = await request.json();
 
   //checking if the task exists
