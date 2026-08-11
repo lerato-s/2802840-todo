@@ -73,6 +73,13 @@ CREATE TABLE IF NOT EXISTS tasks (
     ```bash
     npm run dev
     ```
-    
+
 4. Open your browser to http://localhost:3000
 
+
+## Testing 
+
+```bash
+    # Run all tests
+    npm test
+    ```
