@@ -47,11 +47,25 @@ export default function Home() {
     setTasks(tasks.filter(task => task.id !== id));
   };
 
+  const sortTasks = (key: "topic" | "status" | "due_date") => {
+    const sorted = [...tasks].sort((a, b) => {
+      if (a[key] < b[key]) return -1;
+      if (a[key] > b[key]) return 1;
+      return 0;
+    });
+    setTasks(sorted);
+  };
+
 
 
   return (
     <div>
       <h1>My Todo App</h1>
+      <div className="flex gap-2 mb-4">
+      <button onClick={() => sortTasks("topic")} className="px-3 py-1 border rounded">Sort by Topic</button>
+      <button onClick={() => sortTasks("status")} className="px-3 py-1 border rounded">Sort by Status</button>
+      <button onClick={() => sortTasks("due_date")} className="px-3 py-1 border rounded">Sort by Due Date</button>
+    </div>
       <TaskForm onCreate={createTask}/>
       <ul>
         {tasks.filter(task => !task.is_archived).map(task => (
