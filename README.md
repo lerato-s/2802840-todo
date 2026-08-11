@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# My Todo App - Documentation
 
-## Getting Started
+## Third-Party Code
 
-First, run the development server:
+-**better-sqlite3**- Easier to learn and write (Just normal SQL)
+-**TypeScript**- Detects errors before the apllication, which prevents runtime crashes.
+-**Tailwind CSS**- Allows one to design user interface dinside the HTML or Javascript components
+-**React**- Used to build interactive user interface components.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Database Design
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Table
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+#### `tasks` Table
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Column | Type | Constraints | Description |
+|--------|------|-------------|-------------|
+| `id` | INTEGER | PRIMARY KEY, AUTOINCREMENT | Unique identifier for each task |
+| `title` | TEXT | NOT NULL | Task title |
+| `description` | TEXT | - | Task description (optional) |
+| `due_date` | TEXT | NOT NULL | Due date in YYYY-MM-DD format |
+| `topic` | TEXT | NOT NULL | Task category (e.g., Work, Personal, Study) |
+| `status` | TEXT | DEFAULT 'Todo' | Status: 'Todo', 'In-Progress', or 'Complete' |
+| `is_archived` | INTEGER | DEFAULT 0 | 0 = no, 1 = yes |
+| `created_at` | TEXT | DEFAULT CURRENT_TIMESTAMP | Creation timestamp |
 
-## Learn More
+### Relationships
 
-To learn more about Next.js, take a look at the following resources:
+- **Single-table design** - No relationships between tables
+- **Archive**: Implemented using `is_archived` flag (tasks are never deleted)
+- **Overdue**: Calculated at read time using:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```sql
+CASE 
+  WHEN due_date < date('now') AND status != 'Complete' AND is_archived = 0
+  THEN 1 
+  ELSE 0 
+END as is_overdue
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Schema
+```sql
+CREATE TABLE IF NOT EXISTS tasks (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  title TEXT NOT NULL,
+  description TEXT,
+  due_date TEXT NOT NULL,
+  topic TEXT NOT NULL,
+  status TEXT DEFAULT 'Todo' CHECK (status IN ('Todo', 'In-Progress', 'Complete')),
+  is_archived INTEGER DEFAULT 0,
+  created_at TEXT DEFAULT CURRENT_TIMESTAMP
+);```
 
-## Deploy on Vercel
+## Running It
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Node.js : v20.x or higher
+- npm : v10.x or higher
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Installation & Setting up
+1. Clone the repository
+    git clone https://github.com/lerato-s/2802840-todo
+    cd 2802840-todo
+
+2. Install dependencies 
+    npm install
+
+3. Start server
+    npm run dev
+
+4. Open your browser to http://localhost:3000
+
