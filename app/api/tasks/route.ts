@@ -15,6 +15,6 @@ export async function POST(request: Request) {
         INSERT INTO tasks (title, description, topic, due_date)
         VALUES (?, ?, ?, ?)`).run(title, description, topic, due_date);
 
-    const newTask = db.prepare('SELECT * FROM tasks').get(result.lastInsertRowid); 
+    const newTask = db.prepare('SELECT * FROM tasks WHERE id = ?').get(result.lastInsertRowid); 
     return Response.json(newTask);
 }
