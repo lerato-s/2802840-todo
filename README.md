@@ -59,14 +59,20 @@ CREATE TABLE IF NOT EXISTS tasks (
 
 ### Installation & Setting up
 1. Clone the repository
+    ```bash
     git clone https://github.com/lerato-s/2802840-todo
     cd 2802840-todo
+    ```
 
-2. Install dependencies 
+2. Install dependencies
+    ```bash
     npm install
+    ```
 
 3. Start server
+    ```bash
     npm run dev
-
+    ```
+    
 4. Open your browser to http://localhost:3000
 
