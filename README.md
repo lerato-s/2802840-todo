@@ -36,6 +36,7 @@ CASE
   THEN 1 
   ELSE 0 
 END as is_overdue
+```
 
 ### Schema
 ```sql
@@ -48,7 +49,8 @@ CREATE TABLE IF NOT EXISTS tasks (
   status TEXT DEFAULT 'Todo' CHECK (status IN ('Todo', 'In-Progress', 'Complete')),
   is_archived INTEGER DEFAULT 0,
   created_at TEXT DEFAULT CURRENT_TIMESTAMP
-);```
+);
+```
 
 ## Running It
 
